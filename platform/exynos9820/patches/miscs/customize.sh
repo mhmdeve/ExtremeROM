@@ -23,20 +23,15 @@ sed -i -e "${LINE}s/ext4/f2fs/g" -e "${LINE}s/$FROM/$TO/g" "$WORK_DIR/vendor/etc
 echo "Disabling A2DP Offload"
 SET_PROP "system" persist.bluetooth.a2dp_offload.disabled "true"
 
-echo "Setting SF flags"
-SET_PROP "vendor" "debug.sf.latch_unsignaled" "1"
-SET_PROP "vendor" "debug.sf.high_fps_late_app_phase_offset_ns" "0"
-SET_PROP "vendor" "debug.sf.high_fps_late_sf_phase_offset_ns" "0"
-
 echo "Disabling HFR"
 SET_PROP "vendor" "debug.sf.show_refresh_rate_overlay_render_rate" "true"
 SET_PROP "vendor" "ro.surface_flinger.game_default_frame_rate_override" "60"
 SET_PROP "vendor" "ro.surface_flinger.enable_frame_rate_override" "false"
 SET_PROP "vendor" "ro.surface_flinger.use_content_detection_for_refresh_rate" "false"
 
-echo "Enable Vulkan"
-SET_PROP "vendor" "ro.hwui.use_vulkan" "true"
-SET_PROP "vendor" "debug.hwui.use_hint_manager" "true"
+echo "HWUI"
+SET_PROP "vendor" "debug.hwui.use_hint_manager=true"
+SET_PROP "vendor" "debug.hwui.target_cpu_time_percent=30"
 
 # For some reason we are missing 2 permissions here: android.hardware.security.model.compatible and android.software.controls
 # First one is related to encryption and second one to SmartThings Device Control
